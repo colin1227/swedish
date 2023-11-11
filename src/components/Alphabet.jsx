@@ -10,7 +10,9 @@ export const Alphabet = ({searchTerm, pageStart}) => {
     // filteredWords
     const [ENfilteredWords, setENfilteredWords] = useState(defaultEN);
     const [SWEfilteredWords, setSWEfilteredWords] = useState(defaultSWE);
-
+    useEffect(() => {
+        console.log('ENwords ', ENwords)
+    }, [ENwords]);
     useEffect(() => {
         const {en, swe} = selectiveZipper(pageStart, pageStart + 1000);
         setENwords(en);
@@ -21,7 +23,7 @@ export const Alphabet = ({searchTerm, pageStart}) => {
     }, [pageStart]);
 
     useEffect(() => {
-        console.log(searchTerm)
+        // console.log(searchTerm)
         if (searchTerm.length >= 2) {
             let ENtoReplace = [];
             let SWEtoReplace = [];

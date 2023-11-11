@@ -42,6 +42,7 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
       display: 'flex',
       fontSize: 12,
       color: 'white',
+      zIndex: 1,
       width: width}}>
       <div style={{
         width: width * (2/3),
