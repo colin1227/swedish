@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
+export const Header = ({ navigator, pageStart, setSearchTerm, setPageStart }) => {
   const [textInput, setTextInput] = useState('');
 
   useEffect(() => {
@@ -9,7 +9,7 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
     } else {
       setSearchTerm('')
     }
-  }, [textInput]);
+  }, [setSearchTerm, textInput]);
 
   const { innerWidth: width } = window;
   const aTagStyle = {
@@ -36,16 +36,18 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
   }
 
   return (
-    <header className="App-header" style={{  position: 'fixed',
+    <header className="App-header" style={{
+      position: 'fixed',
       backgroundColor: '#006AA7',
       minHeight: 50,
       display: 'flex',
       fontSize: 12,
       color: 'white',
       zIndex: 1,
-      width: width}}>
+      width: width
+    }}>
       <div style={{
-        width: width * (2/3),
+        width: width * (2 / 3),
         display: 'flex',
         flexDirection: 'row',
         justifyItems: 'center',
@@ -61,13 +63,17 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
           setTextInput(event.target.value)
         }} />
       </div>
+      <div>
+        <div style={{ fontSize: 24 }}>{pageStart} - {pageStart + 1000} of 410,746</div>
+      </div>
       <div style={{
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        <a style={aTagStyle}>Alphabet</a>
-        <a style={aTagStyle}>Translate Tango</a>
-        <a style={aTagStyle}>Game</a>
+        <button onClick={() => navigator.navigate('Home')} style={aTagStyle}>Home Page</button>
+        <button onClick={() => navigator.navigate('Brevity')} style={aTagStyle}>Alphabet</button>
+        <button onClick={() => navigator.navigate('Brevity')} style={aTagStyle}>Translate Tango</button>
+        <button onClick={() => navigator.navigate('Brevity')} style={aTagStyle}>Game</button>
       </div>
     </header>
   )
