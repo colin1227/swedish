@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { Text } from "react-native-web";
 
-export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
+export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIsStrict }) => {
   const [textInput, setTextInput] = useState('');
-
   useEffect(() => {
     if (textInput.length >= 2) {
       setSearchTerm(textInput);
@@ -10,6 +10,10 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
       setSearchTerm('')
     }
   }, [textInput]);
+
+  const changeStrict = () => {
+    setIsStrict(!isStrict)
+  }
 
   const { innerWidth: width } = window;
   const aTagStyle = {
@@ -36,16 +40,18 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
   }
 
   return (
-    <header className="App-header" style={{  position: 'fixed',
+    <header className="App-header" style={{
+      position: 'fixed',
       backgroundColor: '#006AA7',
       minHeight: 50,
       display: 'flex',
       fontSize: 12,
       color: 'white',
       zIndex: 1,
-      width: width}}>
+      width: width
+    }}>
       <div style={{
-        width: width * (2/3),
+        width: width * (2 / 3),
         display: 'flex',
         flexDirection: 'row',
         justifyItems: 'center',
@@ -55,19 +61,42 @@ export const Header = ({ pageStart, setSearchTerm, setPageStart }) => {
           <button style={aTagStyle} onClick={() => previousPage()}>Previous</button>
           <button style={aTagStyle} onClick={() => nextPage()}>Next</button>
         </div>
-        <input style={{
-          height: 26,
-        }} onChange={(event) => {
-          setTextInput(event.target.value)
-        }} />
+        <div 
+          style={{
+            display: 'flex',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center'
+            }}
+          >
+          <Text style={{
+            color: '#FFFFFF',
+          }}>Strict Search</Text>
+          <input
+          type="checkbox"
+          value={isStrict}
+          onChange={changeStrict}
+          style={{
+            marginRight: '10px'
+          }} />
+          </div>
+          <input style={{
+            height: 26,
+          }} onChange={(event) => {
+            setTextInput(event.target.value)
+          }} />
+        </div>
       </div>
       <div style={{
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        <a style={aTagStyle}>Alphabet</a>
+        {/* <a style={aTagStyle}>Alphabet</a>
         <a style={aTagStyle}>Translate Tango</a>
-        <a style={aTagStyle}>Game</a>
+        <a style={aTagStyle}>Game</a> */}
       </div>
     </header>
   )

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { selectiveZipper } from '../helper';
+import { searchByTerm, selectiveZipper } from '../helper';
 
-export const Alphabet = ({searchTerm, pageStart}) => {
+export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
     const { innerWidth: width } = window;
     const { en: defaultEN, swe: defaultSWE } = selectiveZipper(0, 1000);
     // make these an unfilteredWords
@@ -23,17 +23,8 @@ export const Alphabet = ({searchTerm, pageStart}) => {
     }, [pageStart]);
 
     useEffect(() => {
-        // console.log(searchTerm)
         if (searchTerm.length >= 2) {
-            let ENtoReplace = [];
-            let SWEtoReplace = [];
-            for(let i = 0; i < ENwords.length; i++) {
-                if(ENwords[i].includes(searchTerm) || ENwords[i].includes(searchTerm)) {
-                    ENtoReplace.push(ENwords[i]);
-                    SWEtoReplace.push(SWEwords[i]);
-                }
-            }
-            console.log('finished for loop')
+            const asdf = searchByTerm(isStrict, searchTerm);
             setENfilteredWords(ENtoReplace);
             setSWEfilteredWords(SWEtoReplace);
         } else {

@@ -31,6 +31,22 @@ const SWE_of_ENindexMatcher = (ENchar) => {
     return index;
 }
 
+const searchByTerm = (isStrict, term) => {
+    let ENtoReplace = [];
+    let SWEtoReplace = [];
+    for(let i = 0; i < ENwords.length; i++) {
+        if(ENwords[i].includes(searchTerm) || ENwords[i].includes(searchTerm)) {
+            ENtoReplace.push(ENwords[i]);
+            SWEtoReplace.push(SWEwords[i]);
+        }
+    }
+    console.log('finished for loop')
+    return {
+        ENtoReplace,
+        SWEtoReplace,
+    };
+}
+
   // If I want all of one letter I need to add
   // the indexes of all the words starting with
   // the same character.
@@ -81,6 +97,7 @@ module.exports = {
     ENalphabet,
     SWEcharCount,
     ENcharCount,
+    searchByTerm,
     SWE_of_ENindexMatcher,
     EN_of_SWEindexMatcher,
     SWEallOfChar,

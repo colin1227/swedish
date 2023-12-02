@@ -10,27 +10,33 @@ const Stack = createNativeStackNavigator();
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [pageStart, setPageStart] = useState(0);
+  const [isStrict, setIsStrict] = useState(false);
   useEffect(() => {
     console.log(`pageStart: ${pageStart}`);
-  },[pageStart]);
+  }, [pageStart]);
   return (
     <NavigationContainer>
-     <div className="App">
-       <Header setSearchTerm={setSearchTerm} pageStart={pageStart} setPageStart={setPageStart} />
-      <Stack.Navigator>
-      <Stack.Screen
-        initialParams={{
-          searchTerm,
-          pageStart
-        }}
-        searchTerm={searchTerm}
-        pageStart={pageStart}
-        name={'Alphabet'}
-        component={() => <Alphabet searchTerm={searchTerm} pageStart={pageStart} />} />
-      </Stack.Navigator>
-       <footer className='App-footer'>
-       </footer>
-     </div>
+      <div className="App">
+        <Header
+          isStrict={isStrict}
+          pageStart={pageStart}
+          setIsStrict={setIsStrict}
+          setSearchTerm={setSearchTerm}
+          setPageStart={setPageStart} />
+        <Stack.Navigator>
+          <Stack.Screen
+            initialParams={{
+              searchTerm,
+              pageStart
+            }}
+            searchTerm={searchTerm}
+            pageStart={pageStart}
+            name={'Alphabet'}
+            component={() => <Alphabet isStrict={isStrict} searchTerm={searchTerm} pageStart={pageStart} />} />
+        </Stack.Navigator>
+        <footer className='App-footer'>
+        </footer>
+      </div>
     </NavigationContainer>
   );
 }
