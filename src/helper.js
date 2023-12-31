@@ -47,6 +47,13 @@ const searchByTerm = (isStrict, term) => {
   };
 }
 
+const selectWord (wordIndex) => {
+    return {
+       en: EN_wordlist[wordIndex],
+       swe: SWE_wordlist[wordList]
+    }
+}
+
 // If I want all of one letter I need to add
 // the indexes of all the words starting with
 // the same character.
@@ -103,4 +110,5 @@ module.exports = {
   SWEallOfChar,
   ENallOfChar,
   selectiveZipper,
+  selectWord,
 }

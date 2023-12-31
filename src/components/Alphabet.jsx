@@ -24,9 +24,9 @@ export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
 
     useEffect(() => {
         if (searchTerm.length >= 2) {
-            const asdf = searchByTerm(isStrict, searchTerm);
-            setENfilteredWords(ENtoReplace);
-            setSWEfilteredWords(SWEtoReplace);
+            const searchResults = searchByTerm(isStrict, searchTerm);
+            setENfilteredWords(searchResults.ENtoReplace);
+            setSWEfilteredWords(searchResults.SWEtoReplace);
         } else {
             setENfilteredWords(ENwords);
             setSWEfilteredWords(SWEwords);

@@ -94,8 +94,8 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         width: width / 3,
         justifyContent: 'space-between',
       }}>
+        {/* <a style={aTagStyle}>Note & record</a> */}
         {/* <a style={aTagStyle}>Alphabet</a>
-        <a style={aTagStyle}>Translate Tango</a>
         <a style={aTagStyle}>Game</a> */}
       </div>
     </header>

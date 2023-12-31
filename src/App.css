@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   background-color: #bbbbbb;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -15,9 +16,13 @@
 }
 
 .App-footer {
-  position: static;
-  align-items: end;
   display: flex;
+  align-items:flex-end;
+  align-content: flex-end;
+  align-self: flex-end;
+  flex-direction: column;
+  /* position: static; */
   background-color: #006AA7;
   min-height: 10vh;
+  width: 100%;
 }
