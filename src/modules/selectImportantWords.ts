@@ -2,7 +2,7 @@ const fs = require('fs');
 const { SWEvowels, SWEconsonants } = require('../../src/helper');
 const { wordList: SWE_wordlist } = require('../wordlists/swe_wordlist.json');
 const { wordList: EN_wordlist } = require('../wordlists/en_wordlist.json');
-export interface options {
+interface options {
   sweWord: string; //
   enWord: string; //
   isImportant: boolean; //
@@ -13,11 +13,11 @@ export interface options {
   longFormVowels: string[];
 }
 
-export const changeImportance = (val) => {
+const changeImportance = (val) => {
   return !val;
 }
 
-export const isAVowel = (char: string) => {
+const isAVowel = (char: string) => {
   return SWEvowels.includes(char);
 };
 
@@ -43,7 +43,7 @@ const isShortFormVowel = (word: string, index: number) => {
 }
 
 // Swedish to english comparison
-export const createOptionsOfWord = (word: string, index: number) => {
+const createOptionsOfWord = (word: string, index: number) => {
   // count vowels
   // are the vowels next to eachother?
   // how many consanants follow the last vowel
@@ -76,4 +76,12 @@ export const createOptionsOfWord = (word: string, index: number) => {
     shortFormVowels: shortFormVowels,
     longFormVowels: longFormVowels
   } as options;
+}
+
+module.exports = {
+  changeImportance,
+  isAVowel,
+  findStringOfVowels,
+  isShortFormVowel,
+  createOptionsOfWord
 }
