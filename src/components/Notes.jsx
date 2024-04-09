@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { selectWord } from '../helper';
 const Notes = ({ wordIndex }) => {
   return (
     <div
@@ -8,7 +8,7 @@ const Notes = ({ wordIndex }) => {
         height: '100%',
         backgroundColor: '#FFFFAA'
       }}>
-        {selectWord[wordIndex]}
+      {selectWord[wordIndex]}
     </div>
   )
 }
