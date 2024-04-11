@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "react-native-web";
+import { Link } from '@react-navigation/native';
 
 export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIsStrict }) => {
   const [textInput, setTextInput] = useState('');
@@ -9,7 +10,7 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
     } else {
       setSearchTerm('')
     }
-  }, [textInput]);
+  }, [textInput, setSearchTerm]);
 
   const changeStrict = () => {
     setIsStrict(!isStrict)
@@ -61,7 +62,7 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
           <button style={aTagStyle} onClick={() => previousPage()}>Previous</button>
           <button style={aTagStyle} onClick={() => nextPage()}>Next</button>
         </div>
-        <div 
+        <div
           style={{
             display: 'flex',
           }}
@@ -72,16 +73,16 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
               alignItems: 'center'
             }}
           >
-          <Text style={{
-            color: '#FFFFFF',
-          }}>Strict Search</Text>
-          <input
-          type="checkbox"
-          value={isStrict}
-          onChange={changeStrict}
-          style={{
-            marginRight: '10px'
-          }} />
+            <Text style={{
+              color: '#FFFFFF',
+            }}>Strict Search</Text>
+            <input
+              type="checkbox"
+              value={isStrict}
+              onChange={changeStrict}
+              style={{
+                marginRight: '10px'
+              }} />
           </div>
           <input style={{
             height: 26,
@@ -94,9 +95,9 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        {/* <a style={aTagStyle}>Note & record</a> */}
-        {/* <a style={aTagStyle}>Alphabet</a>
-        <a style={aTagStyle}>Game</a> */}
+        <Link to={{ screen: 'Notes', params: {} }} style={aTagStyle}>Notes</Link>
+        <Link to={{ screen: 'Alphabet', params: {} }} style={aTagStyle}>Alphabet</Link>
+        {/* <a style={aTagStyle}>Game</a> */}
       </div>
     </header>
   )
