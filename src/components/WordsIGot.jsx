@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { searchByTerm, selectiveZipper } from '../helper';
 
-export const Alphabet = ({ isStrict, searchTerm, pageStart }) => {
+export const WordsIGot = ({ isStrict, searchTerm, pageStart }) => {
   const { innerWidth: width } = window;
   const { en: defaultEN, swe: defaultSWE } = selectiveZipper(0, 1000);
   // make these an unfilteredWords

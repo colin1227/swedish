@@ -1,5 +1,5 @@
 import './App.css';
-import { Alphabet } from './components/Alphabet';
+import { WordsIGot } from './components/WordsIGot';
 import Notes from './components/Notes';
 import { Header } from './components/Header';
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,16 +25,16 @@ function App() {
           setIsStrict={setIsStrict}
           setSearchTerm={setSearchTerm}
           setPageStart={setPageStart} />
-        <Stack.Navigator initialRouteName='AlphabetREAL'>
+        <Stack.Navigator initialRouteName='Alphabet'>
           <Stack.Screen
-            name={'Alphabet'}
+            name={'Words'}
             initialParams={{
               searchTerm,
               pageStart
             }}
             searchTerm={searchTerm}
             pageStart={pageStart}
-            component={() => Alphabet({ isStrict, searchTerm, pageStart })} />
+            component={() => WordsIGot({ isStrict, searchTerm, pageStart })} />
 
           <Stack.Screen
             name={'Notes'}
@@ -43,7 +43,7 @@ function App() {
             }}
             component={() => Notes({ wordIndex: 12000 })} />
           <Stack.Screen
-            name={'AlphabetREAL'}
+            name={'Alphabet'}
             component={() => AlphabetREAL()} />
         </Stack.Navigator>
         <footer className='App-footer'>

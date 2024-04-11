@@ -95,9 +95,19 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        <Link to={{ screen: 'Notes', params: {} }} style={aTagStyle}>Notes</Link>
+        <Link to={{ screen: 'Words', params: {} }} style={aTagStyle}>Words</Link>
         <Link to={{ screen: 'Alphabet', params: {} }} style={aTagStyle}>Alphabet</Link>
-        {/* <a style={aTagStyle}>Game</a> */}
+        <Link to={{ screen: 'Notes', params: {} }} style={aTagStyle}>Notes</Link>
+        {/*
+        
+        Guess the Word:
+         - i guesses, n seconds
+         - i * n seconds
+         - show the word on return
+         - show an option to google the word in EN or SWE
+         - show an option to hear the word in google translate
+        <Link style={aTagStyle}>Game</Link> */}
+
       </div>
     </header>
   )
