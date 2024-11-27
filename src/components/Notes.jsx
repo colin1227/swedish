@@ -1,4 +1,5 @@
 import React from 'react';
+import { selectWord } from '../helper'
 
 const Notes = ({ wordIndex }) => {
   return (

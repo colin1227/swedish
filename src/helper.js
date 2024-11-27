@@ -47,10 +47,10 @@ const searchByTerm = (isStrict, term) => {
   };
 }
 
-const selectWord (wordIndex) => {
+const selectWord = (wordIndex) => {
     return {
        en: EN_wordlist[wordIndex],
-       swe: SWE_wordlist[wordList]
+       swe: SWE_wordlist[wordIndex]
     }
 }
 
