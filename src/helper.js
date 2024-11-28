@@ -94,7 +94,6 @@ const letterList = []
 // console.log(letterList)
 
 const selectiveZipper = (start, end) => {
-  console.log('zipped')
   let zipper = { en: [], swe: [] }
   for (let i = start; i < end; i++) {
     zipper.en.push(EN_wordlist[i]);

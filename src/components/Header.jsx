@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "react-native-web";
 import { Link } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIsStrict }) => {
+export const Header = ({
+  isStrict,
+  pageStart,
+  setSearchTerm,
+  setPageStart,
+  setIsStrict
+}) => {
+  const navigation = useNavigation();
+
   const [textInput, setTextInput] = useState('');
   useEffect(() => {
     if (textInput.length >= 2) {
@@ -21,7 +30,9 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
     fontFamily: 'revert',
     fontSize: 24,
     padding: 5,
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    marginLeft: 5,
+    marginRight: 5
   };
 
   const nextPage = () => {
@@ -59,7 +70,8 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         justifyContent: 'space-around'
       }}>
         <div>
-          <button style={aTagStyle} onClick={() => previousPage()}>Previous</button>
+          <button style={ aTagStyle } onClick={() => previousPage()}>Previous</button>
+          {true /* page === 'Alphabet' */ && <text>{pageStart} to {pageStart + 1000}</text>}
           <button style={aTagStyle} onClick={() => nextPage()}>Next</button>
         </div>
         <div
@@ -95,9 +107,9 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        <Link to={{ screen: 'Words', params: {} }} style={aTagStyle}>Words</Link>
+        {/* <Link to={{ screen: 'Words', params: {} }} style={aTagStyle}>Words</Link>
         <Link to={{ screen: 'Alphabet', params: {} }} style={aTagStyle}>Alphabet</Link>
-        <Link to={{ screen: 'Notes', params: {} }} style={aTagStyle}>Notes</Link>
+        <Link to={{ screen: 'Notes', params: {} }} style={aTagStyle}>Notes</Link> */}
         {/*
         
         Guess the Word:
@@ -108,6 +120,9 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
          - show an option to hear the word in google translate
         <Link style={aTagStyle}>Game</Link> */}
 
+        <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Note</button>
+        <button style={aTagStyle} onClick={() => navigation.navigate('Alphabet')}>Alphabet</button>
+        {/* <a style={aTagStyle}>Game</a> */}
       </div>
     </header>
   )
