@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "react-native-web";
+import { useNavigation } from '@react-navigation/native';
 
-export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIsStrict }) => {
+export const Header = ({
+  isStrict,
+  pageStart,
+  setSearchTerm,
+  setPageStart,
+  setIsStrict
+}) => {
+  const navigation = useNavigation();
+
   const [textInput, setTextInput] = useState('');
   useEffect(() => {
     if (textInput.length >= 2) {
@@ -20,7 +29,9 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
     fontFamily: 'revert',
     fontSize: 24,
     padding: 5,
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    marginLeft: 5,
+    marginRight: 5
   };
 
   const nextPage = () => {
@@ -58,7 +69,8 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         justifyContent: 'space-around'
       }}>
         <div>
-          <button style={aTagStyle} onClick={() => previousPage()}>Previous</button>
+          <button style={ aTagStyle } onClick={() => previousPage()}>Previous</button>
+          {true /* page === 'Alphabet' */ && <text>{pageStart} to {pageStart + 1000}</text>}
           <button style={aTagStyle} onClick={() => nextPage()}>Next</button>
         </div>
         <div 
@@ -74,6 +86,7 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
           >
           <Text style={{
             color: '#FFFFFF',
+            fontSize: 8
           }}>Strict Search</Text>
           <input
           type="checkbox"
@@ -94,9 +107,9 @@ export const Header = ({ isStrict, pageStart, setSearchTerm, setPageStart, setIs
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        {/* <a style={aTagStyle}>Note & record</a> */}
-        {/* <a style={aTagStyle}>Alphabet</a>
-        <a style={aTagStyle}>Game</a> */}
+        <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Note</button>
+        <button style={aTagStyle} onClick={() => navigation.navigate('Alphabet')}>Alphabet</button>
+        {/* <a style={aTagStyle}>Game</a> */}
       </div>
     </header>
   )

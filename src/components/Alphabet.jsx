@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { searchByTerm, selectiveZipper } from '../helper';
 
+// TODO: rename
 export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
     const { innerWidth: width } = window;
     const { en: defaultEN, swe: defaultSWE } = selectiveZipper(0, 1000);
@@ -10,9 +11,9 @@ export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
     // filteredWords
     const [ENfilteredWords, setENfilteredWords] = useState(defaultEN);
     const [SWEfilteredWords, setSWEfilteredWords] = useState(defaultSWE);
-    useEffect(() => {
-        console.log('ENwords ', ENwords)
-    }, [ENwords]);
+    // useEffect(() => {
+    //     console.log('ENwords ', ENwords)
+    // }, [ENwords]);
     useEffect(() => {
         const {en, swe} = selectiveZipper(pageStart, pageStart + 1000);
         setENwords(en);
@@ -38,7 +39,6 @@ export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
             <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                paddingTop: 65
             }}>
               {
               SWEfilteredWords.map((w, i) => {
@@ -49,7 +49,10 @@ export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
                         fontSize: 24,
                         flexGrow: 1,
                         width: width / 3,
-                        height: 100
+                        height: 100,
+                        color: 'white',
+                        backgroundColor: '#191515',
+                        paddingTop: 65
                     }}>
                         <div
                         style={{

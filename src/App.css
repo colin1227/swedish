@@ -1,11 +1,14 @@
 .App {
   text-align: center;
   background-color: #bbbbbb;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
+html {
+  background-color: #191515;
+}
 .App-logo {
-  height: 40vmin;
+  /* height: 40vmin; */
   pointer-events: none;
 }
 
@@ -15,14 +18,3 @@
   }
 }
 
-.App-footer {
-  display: flex;
-  align-items:flex-end;
-  align-content: flex-end;
-  align-self: flex-end;
-  flex-direction: column;
-  /* position: static; */
-  background-color: #006AA7;
-  min-height: 10vh;
-  width: 100%;
-}
