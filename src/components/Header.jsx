@@ -5,13 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 export const Header = ({
   isStrict,
   pageStart,
+  wordIndex,
   setSearchTerm,
   setPageStart,
-  setIsStrict
+  setIsStrict,
+  setWordIndex,
+  routeNameRef: page,
 }) => {
   const navigation = useNavigation();
-
   const [textInput, setTextInput] = useState('');
+
   useEffect(() => {
     if (textInput.length >= 2) {
       setSearchTerm(textInput);
@@ -22,7 +25,7 @@ export const Header = ({
 
   const changeStrict = () => {
     setIsStrict(!isStrict)
-  }
+  };
 
   const { innerWidth: width } = window;
   const aTagStyle = {
@@ -34,19 +37,46 @@ export const Header = ({
     marginRight: 5
   };
 
+  const nextWord = () => {
+    console.log('next word');
+    setWordIndex(wordIndex + 1);
+  }
+
+  const previousWord = () => {
+    console.log('previous word');
+    setWordIndex(wordIndex - 1);
+  }
+
   const nextPage = () => {
-    console.log('next')
+    console.log('next page');
     if (pageStart < 409785) {
-      setPageStart(pageStart + 1000)
+      setPageStart(pageStart + 1000);
     } else if (pageStart === 409000) {
-      setPageStart(pageStart + 785)
+      setPageStart(pageStart + 785);
     }
   }
   const previousPage = () => {
+    console.log('previous page');
     if (pageStart >= 1000) {
       setPageStart(pageStart - 1000);
     } else if (pageStart === 409785) {
       setPageStart(pageStart - 785);
+    }
+  }
+
+  const next = () => {
+    if (page === 'Alphabet') {
+      nextPage();
+    } else if (page === 'Notes') {
+      nextWord();
+    }
+  }
+
+  const previous = () => {
+    if (page === 'Alphabet') {
+      previousPage();
+    } else if (page === 'Notes') {
+      previousWord();
     }
   }
 
@@ -69,9 +99,9 @@ export const Header = ({
         justifyContent: 'space-around'
       }}>
         <div>
-          <button style={ aTagStyle } onClick={() => previousPage()}>Previous</button>
-          {true /* page === 'Alphabet' */ && <text>{pageStart} to {pageStart + 1000}</text>}
-          <button style={aTagStyle} onClick={() => nextPage()}>Next</button>
+          <button style={ aTagStyle } onClick={() => previous()}>Previous</button>
+          {page === 'Alphabet' && <ext>{pageStart} to {pageStart + 1000}</ext>}
+          <button style={aTagStyle} onClick={() => next()}>Next</button>
         </div>
         <div 
           style={{
@@ -107,7 +137,7 @@ export const Header = ({
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Note</button>
+        <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Notes</button>
         <button style={aTagStyle} onClick={() => navigation.navigate('Alphabet')}>Alphabet</button>
         {/* <a style={aTagStyle}>Game</a> */}
       </div>
