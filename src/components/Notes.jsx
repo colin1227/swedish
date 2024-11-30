@@ -1,27 +1,54 @@
-import React from 'react';
-import { selectWord } from '../helper';
-import { TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { selectWord } from '../helper'
+import { Text, TextInput } from "react-native-web";
+  
 const Notes = ({ wordIndex }) => {
-  const word = selectWord(wordIndex);
-  console.log('word', word)
+    const [EN_word, setEN_word] = useState('');
+    const [SWE_word, setSWE_word] = useState('');
+    console.log('word', word)
+    const word = selectWord(wordIndex);
+
+  useEffect(() => {
+    const { en, swe } = selectWord(wordIndex);
+    setEN_word(en);
+    setSWE_word(swe);
+  }, [wordIndex])
+
+  const [messageBody, setMessageBody] = useState('');
   return (
     <div
       style={{
         width: '100%',
         height: '100%',
-        backgroundColor: '#FFFFAA',
         marginTop: 65,
-        display: 'flex',
-        justifyContent: 'space-around'
       }}>
-      <text>
-        EN: {word.en}
-      </text>
-      <text>
-        SWE: {word.swe}
-      </text>
-      <div>
-        <input />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 36
+          }}>{SWE_word}</Text>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 36
+          }}>{EN_word}</Text>
+      </div>
+      <div style={{
+        marginTop: 15
+      }}>
+        <TextInput
+          row={4}
+          multiline
+          numberOfLines={4}
+          value
+        />
+
       </div>
     </div>
   )

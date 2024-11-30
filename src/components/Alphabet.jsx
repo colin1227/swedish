@@ -11,9 +11,7 @@ export const Alphabet = ({isStrict ,searchTerm, pageStart}) => {
     // filteredWords
     const [ENfilteredWords, setENfilteredWords] = useState(defaultEN);
     const [SWEfilteredWords, setSWEfilteredWords] = useState(defaultSWE);
-    // useEffect(() => {
-    //     console.log('ENwords ', ENwords)
-    // }, [ENwords]);
+
     useEffect(() => {
         const {en, swe} = selectiveZipper(pageStart, pageStart + 1000);
         setENwords(en);
