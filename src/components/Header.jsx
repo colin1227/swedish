@@ -12,6 +12,7 @@ export const Header = ({
   setWordIndex,
   routeNameRef: page,
 }) => {
+  
   const navigation = useNavigation();
   const [textInput, setTextInput] = useState('');
 
