@@ -9,8 +9,8 @@ export const Letters = () => {
         return (
           <div
             style={{
-            fontWeight: 'bold'
-          }}
+              fontWeight: 'bold'
+            }}
             onClick={(e) => {
               const wOL = SWEallOfChar(e.target.value);
               setWordsOfLetter(wOL);

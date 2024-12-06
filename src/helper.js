@@ -1,8 +1,14 @@
 const { wordList: SWE_wordlist } = require('./wordlists/swe_wordlist.json');
 const { wordList: EN_wordlist } = require('./wordlists/en_wordlist.json');
 
-const SWEalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö'];
-const ENalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+// const SWEalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö'];
+// const ENalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const SWEalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö', 'symbols'];
+const SWEvowels = ['a', 'e', 'i', 'o', 'u', 'y', 'ä', 'å', 'ö'];
+const SWEconsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'];
+const ENalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'symbols'];
+const ENvowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+const ENconsonants = [];
 
 const SWEcharCount = [
   17963, 28408, 4308, 13827, 9164,
@@ -59,6 +65,29 @@ const SWE_of_ENindexMatcher = (ENchar) => {
   return index;
 }
 
+const searchByTerm = (isStrict, term) => {
+  let ENtoReplace = [];
+  let SWEtoReplace = [];
+  for (let i = 0; i < EN_wordlist.length; i++) {
+    if (EN_wordlist[i].includes(term) || EN_wordlist[i].includes(term)) {
+      ENtoReplace.push(EN_wordlist[i]);
+      SWEtoReplace.push(SWE_wordlist[i]);
+    }
+  }
+  console.log('finished for loop')
+  return {
+    ENtoReplace,
+    SWEtoReplace,
+  };
+}
+
+const selectWord = (wordIndex) => {
+  return {
+    en: EN_wordlist[wordIndex],
+    swe: SWE_wordlist[wordIndex]
+  }
+}
+
 // If I want all of one letter I need to add
 // the indexes of all the words starting with
 // the same character.
@@ -107,6 +136,10 @@ const selectiveZipper = (start, end) => {
     } else {
       addendum += 1
     }
+    // let zipper = { en: [], swe: [] }
+    // for (let i = start; i < end; i++) {
+    //   zipper.en.push(EN_wordlist[i]);
+    //   zipper.swe.push(SWE_wordlist[i]);
   }
   return zipper;
 }
@@ -115,13 +148,18 @@ console.log(SWE_wordlist.length)
 module.exports = {
   indexBuffer,
   SWEalphabet,
+  SWEvowels,
   ENalphabet,
+  ENvowels,
   SWEcharCount,
   ENcharCount,
+  SWEconsonants,
+  searchByTerm,
   SWE_of_ENindexMatcher,
   EN_of_SWEindexMatcher,
   SWEallOfChar,
   ENallOfChar,
   selectiveZipper,
   findWeirdWords,
+  selectWord,
 }
