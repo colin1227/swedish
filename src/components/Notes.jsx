@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { selectWord } from '../helper'
 import { Text, TextInput } from "react-native-web";
-  
+
 const Notes = ({ wordIndex }) => {
-    const [EN_word, setEN_word] = useState('');
-    const [SWE_word, setSWE_word] = useState('');
-    console.log('word', word)
-    const word = selectWord(wordIndex);
+  const [EN_word, setEN_word] = useState('');
+  const [SWE_word, setSWE_word] = useState('');
+  // const word = selectWord(wordIndex);
+  // console.log('word', word)
 
   useEffect(() => {
     const { en, swe } = selectWord(wordIndex);
@@ -43,12 +43,15 @@ const Notes = ({ wordIndex }) => {
         marginTop: 15
       }}>
         <TextInput
+          style={{
+            height: 50
+          }}
           row={4}
           multiline
           numberOfLines={4}
-          value
+          value={messageBody}
+          onChangeText={(e) => setMessageBody(e)}
         />
-
       </div>
     </div>
   )

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Text } from "react-native-web";
-import { Link } from '@react-navigation/native';
+// import { Link } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
 export const Header = ({
@@ -12,11 +12,15 @@ export const Header = ({
   setPageStart,
   setIsStrict,
   setWordIndex,
-  routeNameRef: page,
+  routeNameRef,
+  page
 }) => {
   const navigation = useNavigation();
   const [textInput, setTextInput] = useState('');
 
+  useEffect(() => {
+    console.log("page", page)
+  }, [page]);
   useEffect(() => {
     if (textInput.length >= 2) {
       setSearchTerm(textInput);
@@ -36,51 +40,54 @@ export const Header = ({
     padding: 5,
     textDecoration: 'underline',
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
+    zIndex: 5
   };
 
-  const nextWord = () => {
+  const nextWord = useCallback(() => {
     console.log('next word');
     setWordIndex(wordIndex + 1);
-  }
+  }, [setWordIndex, wordIndex]);
 
-  const previousWord = () => {
-    console.log('previous word');
-    setWordIndex(wordIndex - 1);
-  }
-
-  const nextPage = () => {
+  const nextPage = useCallback(() => {
     console.log('next page');
     if (pageStart < 409785) {
       setPageStart(pageStart + 1000);
     } else if (pageStart === 409000) {
       setPageStart(pageStart + 785);
     }
-  }
-  const previousPage = () => {
+  }, [pageStart, setPageStart]);
+
+  const previousWord = useCallback(() => {
+    console.log('previous word');
+    setWordIndex(wordIndex - 1);
+  }, [setWordIndex, wordIndex]);
+
+  const previousPage = useCallback(() => {
     console.log('previous page');
     if (pageStart >= 1000) {
       setPageStart(pageStart - 1000);
     } else if (pageStart === 409785) {
       setPageStart(pageStart - 785);
     }
-  }
+  }, [pageStart, setPageStart]);
 
-  const next = () => {
-    if (page === 'Alphabet') {
+  const next = useCallback(() => {
+    if (page === 'WordsIGot') {
+      console.log('wordsIGot next')
       nextPage();
     } else if (page === 'Notes') {
       nextWord();
     }
-  }
+  }, [nextPage, nextWord, page]);
 
-  const previous = () => {
-    if (page === 'Alphabet') {
+  const previous = useCallback(() => {
+    if (page === 'WordsIGot') {
       previousPage();
     } else if (page === 'Notes') {
       previousWord();
     }
-  }
+  }, [page, previousPage, previousWord]);
 
   return (
     <header className="App-header" style={{
@@ -102,7 +109,7 @@ export const Header = ({
       }}>
         <div>
           <button style={aTagStyle} onClick={() => previous()}>Previous</button>
-          {page === 'Alphabet' && <ext>{pageStart} to {pageStart + 1000}</ext>}
+          {page === 'WordsIGot' && <Text>{pageStart} to {pageStart + 1000}</Text>}
           <button style={aTagStyle} onClick={() => next()}>Next</button>
         </div>
         <div
@@ -154,7 +161,7 @@ export const Header = ({
          - show an option to hear the word in google translate
         <Link style={aTagStyle}>Game</Link> */}
 
-        <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Note</button>
+        <button style={aTagStyle} onClick={() => navigation.navigate('WordsIGot')}>WordsIGot</button>
         <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Notes</button>
         <button style={aTagStyle} onClick={() => navigation.navigate('Alphabet')}>Alphabet</button>
         {/* <a style={aTagStyle}>Game</a> */}

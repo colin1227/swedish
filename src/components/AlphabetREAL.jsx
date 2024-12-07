@@ -1,33 +1,38 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { SWEalphabet, ENalphabet } from '../helper';
+import { Text } from 'react-native-web';
 
 export const AlphabetREAL = () => {
   const { innerWidth: width } = window;
 
-  const open = useCallback((unfiltered) => {
+  const open = (unfiltered) => {
     const alphabet = unfiltered.filter(v => v !== 'symbols')
+    console.log('alphabet', alphabet)
     return (
       <div style={{
         display: 'flex',
+        justifyContent: 'center',
         flexWrap: 'wrap'
       }}>
-        {alphabet.map((letter) => {
-          return (
-            <text style={{
-              fontSize: 34,
-              marginRight: 10,
-              marginTop: 10,
-              padding: 10,
-              backgroundColor: '#00FFFF'
-            }}>
-              {String(letter).toUpperCase()}
-            </text>
-          )
-        })}
+        {
+          alphabet.map((letter) => {
+            return (
+              <Text style={{
+                fontSize: 34,
+                marginRight: 10,
+                marginTop: 10,
+                padding: 10,
+                backgroundColor: '#00FFFF'
+              }}>
+                {letter.toUpperCase()}
+              </Text>
+            )
+          })
+        }
       </div>
     )
-  }, [])
-
+  }
+  console.log('typeof SWEalphabet', typeof SWEalphabet, SWEalphabet)
   return (
     <div>
       <div style={{
@@ -36,20 +41,28 @@ export const AlphabetREAL = () => {
         paddingTop: 65,
         flexDirection: 'column'
       }}>
-        <div style={{
-          fontSize: 32
-        }}>
-          Swedish Alphabet
+        <div
+          style={{ paddingBottom: 10 }}>
+          <Text
+            style={{
+              fontSize: 32,
+              color: 'white'
+            }}>Swedish Alphabet</Text>
         </div>
-        {open(SWEalphabet)}
-      </div>
-
-      <div style={{
-        fontSize: 32
-      }}>
-        English Alphabet
-      </div>
-      {open(ENalphabet)}
-    </div>)
+        <div>
+          {open(SWEalphabet)}
+        </div>
+        <div style={{
+          paddingBottom: 10
+        }}>
+          <Text style={{
+            fontSize: 32,
+            color: 'white'
+          }}>English Alphabet</Text>
+        </div>
+        {open(ENalphabet)}
+      </div >
+    </div >
+  )
 }
 

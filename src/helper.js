@@ -1,16 +1,16 @@
-const { wordList: SWE_wordlist } = require('./wordlists/swe_wordlist.json');
-const { wordList: EN_wordlist } = require('./wordlists/en_wordlist.json');
+export const { wordList: SWE_wordlist } = require('./wordlists/swe_wordlist.json');
+export const { wordList: EN_wordlist } = require('./wordlists/en_wordlist.json');
 
-// const SWEalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö'];
-// const ENalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-const SWEalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö', 'symbols'];
-const SWEvowels = ['a', 'e', 'i', 'o', 'u', 'y', 'ä', 'å', 'ö'];
-const SWEconsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'];
-const ENalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'symbols'];
-const ENvowels = ['a', 'e', 'i', 'o', 'u', 'y'];
-const ENconsonants = [];
+// export const SWEalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö'];
+// export const ENalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+export const SWEalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö', 'symbols'];
+export const SWEvowels = ['a', 'e', 'i', 'o', 'u', 'y', 'ä', 'å', 'ö'];
+export const SWEconsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'];
+export const ENalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'symbols'];
+export const ENvowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+export const ENconsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'];
 
-const SWEcharCount = [
+export const SWEcharCount = [
   17963, 28408, 4308, 13827, 9164,
   32359, 14409, 18938, 11663, 5063,
   30504, 16593, 23214, 10645, 10372,
@@ -19,7 +19,7 @@ const SWEcharCount = [
   242, 1883, 3405, 3995
 ]
 
-const ENcharCount = [
+export const ENcharCount = [
   11214, 13774, 22574, 12450, 9334,
   12954, 7236, 8776, 8844, 1242,
   1558, 8023, 15304, 5236, 86451,
@@ -29,8 +29,8 @@ const ENcharCount = [
 ]
 
 // 39 length
-const indexBuffer = 38
-const symbols = [
+export const indexBuffer = 38
+export const symbols = [
   '-', '.net', '@',
   '/', '&', '%-enhet',
   '%-enheten', '%-enhetens', '%-enheter',
@@ -46,7 +46,7 @@ const symbols = [
   'É:s', 'µ', 'μg'
 ]
 
-const symbolsIndexes = [
+export const symbolsIndexes = [
   0, 1, 2, 3, 4, 5,
   6, 7, 8, 9, 10, 11,
   12, 13, 14, 15, 16, 17,
@@ -56,7 +56,7 @@ const symbolsIndexes = [
   65284, 410783, 410784
 ]
 
-const SWE_of_ENindexMatcher = (ENchar) => {
+export const SWE_of_ENindexMatcher = (ENchar) => {
   const ENalphabetIndex = ENalphabet.indexOf(ENchar);
   let index = 0;
   for (let i = 0; i < ENalphabetIndex; i++) {
@@ -65,7 +65,7 @@ const SWE_of_ENindexMatcher = (ENchar) => {
   return index;
 }
 
-const searchByTerm = (isStrict, term) => {
+export const searchByTerm = (isStrict, term) => {
   let ENtoReplace = [];
   let SWEtoReplace = [];
   for (let i = 0; i < EN_wordlist.length; i++) {
@@ -81,7 +81,7 @@ const searchByTerm = (isStrict, term) => {
   };
 }
 
-const selectWord = (wordIndex) => {
+export const selectWord = (wordIndex) => {
   return {
     en: EN_wordlist[wordIndex],
     swe: SWE_wordlist[wordIndex]
@@ -92,7 +92,7 @@ const selectWord = (wordIndex) => {
 // the indexes of all the words starting with
 // the same character.
 // Min of 0, Max of 27
-const EN_of_SWEindexMatcher = (SWEchar) => {
+export const EN_of_SWEindexMatcher = (SWEchar) => {
   const SWEalphabetIndex = SWEalphabet.indexOf(SWEchar);
   let index = 0;
   for (let i = 0; i < SWEalphabetIndex; i++) {
@@ -101,21 +101,21 @@ const EN_of_SWEindexMatcher = (SWEchar) => {
   return index;
 }
 
-const SWEallOfChar = (char) => {
+export const SWEallOfChar = (char) => {
   const segmentedWordList = SWE_wordlist.filter((word) => {
     return word[0] === char;
   });
   return segmentedWordList;
 };
 
-const ENallOfChar = (char) => {
+export const ENallOfChar = (char) => {
   const segmentedWordList = EN_wordlist.filter((word) => {
     return word[0] === char;
   })
   return segmentedWordList;
 }
 
-const findWeirdWords = () => {
+export const findWeirdWords = () => {
   let weirdWords = []
   for (let i = 0; i < SWE_wordlist.length; i++) {
     if (!SWEalphabet.includes(SWE_wordlist[i][0].toLowerCase()) && SWE_wordlist[i][0].toLowerCase() !== 's') {
@@ -125,8 +125,8 @@ const findWeirdWords = () => {
   return weirdWords;
 }
 
-const selectiveZipper = (start, end) => {
-  console.log('zipped')
+export const selectiveZipper = (start, end) => {
+  // console.log('zipped')
   let zipper = { en: [], swe: [] }
   let addendum = 0;
   for (let i = start; i < end + addendum; i++) {
@@ -144,22 +144,3 @@ const selectiveZipper = (start, end) => {
   return zipper;
 }
 console.log(SWE_wordlist.length)
-
-module.exports = {
-  indexBuffer,
-  SWEalphabet,
-  SWEvowels,
-  ENalphabet,
-  ENvowels,
-  SWEcharCount,
-  ENcharCount,
-  SWEconsonants,
-  searchByTerm,
-  SWE_of_ENindexMatcher,
-  EN_of_SWEindexMatcher,
-  SWEallOfChar,
-  ENallOfChar,
-  selectiveZipper,
-  findWeirdWords,
-  selectWord,
-}

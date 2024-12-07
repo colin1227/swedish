@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { selectiveZipper } from '../helper';
 import { Header } from '../components/Header';
 
-export const Alphabet = ({ navigationRef }) => {
+export const Alphabet = ({ navigationRef, pageStart, searchTerm }) => {
   const { innerWidth: width } = window;
   const { en: defaultEN, swe: defaultSWE } = selectiveZipper(0, 1000);
   // make these an unfilteredWords
@@ -11,16 +11,14 @@ export const Alphabet = ({ navigationRef }) => {
   // filteredWords
   const [ENfilteredWords, setENfilteredWords] = useState(defaultEN);
   const [SWEfilteredWords, setSWEfilteredWords] = useState(defaultSWE);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [pageStart, setPageStart] = useState(0);
-  console.log(navigationRef)
+  // console.log(navigationRef)
   useEffect(() => {
     const { en, swe } = selectiveZipper(pageStart, pageStart + 1000);
     setENwords(en);
     setSWEwords(swe);
     setENfilteredWords(en);
     setSWEfilteredWords(swe);
-    console.log(`pageStart: ${pageStart}`);
+    // console.log(`pageStart: ${pageStart}`);
   }, [pageStart]);
 
   useEffect(() => {
@@ -28,7 +26,7 @@ export const Alphabet = ({ navigationRef }) => {
       let ENtoReplace = [];
       let SWEtoReplace = [];
       for (let i = 0; i < ENwords.length; i++) {
-        if (ENwords[i].includes(searchTerm) || ENwords[i].includes(searchTerm)) {
+        if (searchTerm && (ENwords[i].includes(searchTerm) || SWEwords[i].includes(searchTerm))) {
           ENtoReplace.push(ENwords[i]);
           SWEtoReplace.push(SWEwords[i]);
         }
@@ -40,14 +38,14 @@ export const Alphabet = ({ navigationRef }) => {
       setENfilteredWords(ENwords);
       setSWEfilteredWords(SWEwords);
     }
-  }, [ENwords, SWEwords, searchTerm]);
+  }, [ENwords, SWEwords, searchTerm, pageStart]);
 
   return (
     <div style={{
       textAlign: 'center',
       backgroundColor: '#bbbbbb',
     }}>
-      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} pageStart={pageStart} setPageStart={setPageStart} />
+      {/* <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} pageStart={pageStart} setPageStart={setPageStart} /> */}
       <div>
         <div style={{
           display: 'flex',
