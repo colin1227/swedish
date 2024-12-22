@@ -109,7 +109,7 @@ export const Header = ({
       }}>
         <div>
           <button style={aTagStyle} onClick={() => previous()}>Previous</button>
-          {page === 'WordsIGot' && <Text>{pageStart} to {pageStart + 1000}</Text>}
+          {page === 'WordsIGot' && <Text>{pageStart} to {pageStart + 1000} of 410,746</Text>}
           <button style={aTagStyle} onClick={() => next()}>Next</button>
         </div>
         <div
@@ -141,9 +141,6 @@ export const Header = ({
           }} />
         </div>
       </div>
-      <div>
-        <div style={{ fontSize: 24 }}>{pageStart} - {pageStart + 1000} of 410,746</div>
-      </div>
       <div style={{
         width: width / 3,
         justifyContent: 'space-between',
@@ -159,12 +156,12 @@ export const Header = ({
          - show the word on return
          - show an option to google the word in EN or SWE
          - show an option to hear the word in google translate
+         - the words that show up multiple times slightly diffrent would be good for learning etymology of the language.
         <Link style={aTagStyle}>Game</Link> */}
 
         <button style={aTagStyle} onClick={() => navigation.navigate('WordsIGot')}>WordsIGot</button>
         <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Notes</button>
         <button style={aTagStyle} onClick={() => navigation.navigate('Alphabet')}>Alphabet</button>
-        {/* <a style={aTagStyle}>Game</a> */}
       </div >
     </header >
   )

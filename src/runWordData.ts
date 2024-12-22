@@ -28,18 +28,19 @@ const loopThroughSwedishWords = () => {
       sweWord: swe_wordList[i],
       enWord: en_wordlist[i],
       isImportant: false,
-      vowels: [],
+      sweVowels: [],
+      enVowels: [],
       numberOfShortFormVowels: 0,
       numberOfLongFormVowels: 0,
-      shortFormVowels: [],
-      longFormVowels: [],
+      shortFormVowelIndexes: [],
+      longFormVowelIndexes: [],
     }
 
   }
   console.log(wordlistLength)
 }
 
-// const test = () => {
+// const readSWE = () => {
 //   const r = fs.readFileSync('../wordlists/swe_wordlist.json');
 //   console.log(r[0])
 // }

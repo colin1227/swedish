@@ -5,11 +5,38 @@ import { Text, TextInput } from "react-native-web";
 const Notes = ({ wordIndex }) => {
   const [EN_word, setEN_word] = useState('');
   const [SWE_word, setSWE_word] = useState('');
-  // const word = selectWord(wordIndex);
-  // console.log('word', word)
+
+  const [isImportant, setIsImportant] = useState(false);
+
+  const [SWE_Vowels, setSWE_Vowels] = useState([]);
+  const [EN_Vowels, setEN_Vowels] = useState([]);
+
+  const [numberOfShortFormVowels, setNumberOfShortFormVowels] = useState(0);
+  const [numberOfLongFormVowels, setNumberOfLongFormVowels] = useState(0);
+
+  const [shortFormVowelIndexes, setShortFormVowelIndexes] = useState([]);
+  const [longFormVowelIndexes, setLongFormVowelIndexes] = useState([]);
+
+  const submit = () => {
+    let wordOptions = {
+      wordIndex,
+      SWE_word,
+      EN_word,
+      isImportant,
+      SWE_Vowels,
+      EN_Vowels,
+      numberOfShortFormVowels,
+      numberOfLongFormVowels,
+      shortFormVowelIndexes,
+      longFormVowelIndexes,
+    }
+
+    const json = JSON.stringify(wordOptions)
+  }
 
   useEffect(() => {
     const { en, swe } = selectWord(wordIndex);
+    console.log('en', en, 'swe', swe);
     setEN_word(en);
     setSWE_word(swe);
   }, [wordIndex])
