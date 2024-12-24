@@ -8,6 +8,7 @@ export const Header = ({
   isStrict,
   pageStart,
   wordIndex,
+  setPage,
   setSearchTerm,
   setPageStart,
   setIsStrict,
@@ -17,6 +18,11 @@ export const Header = ({
 }) => {
   const navigation = useNavigation();
   const [textInput, setTextInput] = useState('');
+
+  const pageNavigation = useCallback((pageName) => {
+    setPage(pageName);
+    navigation.navigate(pageName);
+  }, [navigation]);
 
   useEffect(() => {
     console.log("page", page)
@@ -72,6 +78,7 @@ export const Header = ({
     }
   }, [pageStart, setPageStart]);
 
+  // re-evaluate
   const next = useCallback(() => {
     if (page === 'WordsIGot') {
       console.log('wordsIGot next')
@@ -159,9 +166,9 @@ export const Header = ({
          - the words that show up multiple times slightly diffrent would be good for learning etymology of the language.
         <Link style={aTagStyle}>Game</Link> */}
 
-        <button style={aTagStyle} onClick={() => navigation.navigate('WordsIGot')}>WordsIGot</button>
-        <button style={aTagStyle} onClick={() => navigation.navigate('Notes')}>Notes</button>
-        <button style={aTagStyle} onClick={() => navigation.navigate('Alphabet')}>Alphabet</button>
+        <button style={aTagStyle} onClick={() => pageNavigation('WordsIGot')}>WordsIGot</button>
+        <button style={aTagStyle} onClick={ () => pageNavigation("Notes")}>Notes</button>
+        <button style={aTagStyle} onClick={() => pageNavigation('Alphabet')}>Alphabet</button>
       </div >
     </header >
   )

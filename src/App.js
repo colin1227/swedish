@@ -34,7 +34,8 @@ function App() {
   useEffect(() => {
     console.log('navigationRef', navigationRef?.getCurrentRoute().name)
     setPage(navigationRef?.getCurrentRoute().name)
-  }, [navigationRef])
+  }, [navigationRef]);
+
   return (
     <div className="App">
       <NavigationContainer
@@ -51,7 +52,9 @@ function App() {
           setIsStrict={setIsStrict}
           setSearchTerm={setSearchTerm}
           setWordIndex={setWordIndex}
+          wordIndex={wordIndex}
           setPageStart={setPageStart}
+          setPage={setPage}
           routeNameRef={routeNameRef}
           page={page} />
         <Stack.Navigator

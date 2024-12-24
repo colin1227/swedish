@@ -35,6 +35,7 @@ const Notes = ({ wordIndex }) => {
   }
 
   useEffect(() => {
+    console.log('wordIndex', wordIndex)
     const { en, swe } = selectWord(wordIndex);
     console.log('en', en, 'swe', swe);
     setEN_word(en);
@@ -47,7 +48,7 @@ const Notes = ({ wordIndex }) => {
       style={{
         width: '100%',
         height: '100%',
-        marginTop: 65,
+        marginTop: 165,
       }}>
       <div style={{
         display: 'flex',
