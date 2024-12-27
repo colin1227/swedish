@@ -1,14 +1,13 @@
 export const { wordList: SWE_wordlist } = require('./wordlists/swe_wordlist.json');
 export const { wordList: EN_wordlist } = require('./wordlists/en_wordlist.json');
 
-// export const SWEalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö'];
-// export const ENalphabet = ['symbols', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 export const SWEalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ä', 'å', 'ö', 'symbols'];
-export const SWEvowels = ['a', 'e', 'i', 'o', 'u', 'y', 'ä', 'å', 'ö'];
 export const SWEconsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'];
+export const allSWEVowels = ['a', 'e', 'i', 'o', 'u', 'y', 'ä', 'å', 'ö'];
+
 export const ENalphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'symbols'];
-export const ENvowels = ['a', 'e', 'i', 'o', 'u', 'y'];
 export const ENconsonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'];
+export const allENvowels = ['a', 'e', 'i', 'o', 'u', 'y'];
 
 export const SWEcharCount = [
   17963, 28408, 4308, 13827, 9164,

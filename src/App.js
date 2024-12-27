@@ -1,12 +1,12 @@
 import './App.css';
 import { Alphabet } from './screens/Alphabet';
 import { AlphabetREAL } from './components/AlphabetREAL'
-import { WordsIGot } from './components/WordsIGot';
+// import { WordsIGot } from './components/WordsIGot';
 import { Header } from './components/Header';
-import { NavigationContainer, useIsFocused, useNavigationContainerRef } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'; // { useIsFocused }
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect, useRef, useState } from 'react';
-import { indexBuffer } from './helper';
+// import { indexBuffer } from './helper';
 import Notes from './components/Notes';
 
 const Stack = createNativeStackNavigator();
@@ -58,7 +58,7 @@ function App() {
           routeNameRef={routeNameRef}
           page={page} />
         <Stack.Navigator
-          initialRouteName='WordsIGot'>
+          initialRouteName='Notes'>
           <Stack.Screen
             initialParams={{}}
             name={'Alphabet'}

@@ -3,7 +3,7 @@ const { options } = require('./modules/selectImportantWords');
 const helper = require('./helper');
 const { wordList: swe_wordList } = require('./wordlists/swe_wordlist.json');
 const { wordList: en_wordlist } = require('./wordlists/en_wordlist.json');
-const t = require('./modules/selectImportantWords')
+const modules = require('./modules/selectImportantWords')
 const testLength = 1000;
 const wordlistLength =
   swe_wordList.length === en_wordlist.length ?
@@ -15,7 +15,7 @@ const wordlistLength =
 //     sweWord: swe_wordList[index],
 //     enWord: en_wordlist[index],
 //     isImportant: false,
-//     vowels: swe_wordList[index].filter(char => SWEvowels.includes(char.toLowerCase()));
+//     vowels: swe_wordList[index].filter(char => allSWEvowels.includes(char.toLowerCase()));
 //   }
 // }
 

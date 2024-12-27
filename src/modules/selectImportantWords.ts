@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { SWEvowels, SWEconsonants } = require('../../src/helper');
+const { allSWEvowels, SWEconsonants } = require('../../src/helper');
 const { wordList: SWE_wordlist } = require('../wordlists/swe_wordlist.json');
 const { wordList: EN_wordlist } = require('../wordlists/en_wordlist.json');
 interface options {
@@ -18,13 +18,13 @@ const changeImportance = (val) => {
 }
 
 const isAVowel = (char: string) => {
-  return SWEvowels.includes(char);
+  return allSWEvowels.includes(char);
 };
 
 const findStringOfVowels = (word: string, index: number) => {
   let vowelString: string = word[index];
   for (let i = index + 1; i < word.length; i++) {
-    if (SWEvowels.includes(word[i])) {
+    if (allSWEvowels.includes(word[i])) {
       vowelString = vowelString + word[i];
     } else {
       i = word.length;
@@ -50,7 +50,7 @@ const createOptionsOfWord = (word: string, index: number) => {
   // if it's 1 it is long form
   // if it's 2 it's short form
 
-  const vowelsInWord = word.split('').filter(char => SWEvowels.includes(char));
+  const vowelsInWord = word.split('').filter(char => allSWEvowels.includes(char));
   const numberOfVowels = vowelsInWord.length;
   let shortFormVowels: string[] = [];
   let longFormVowels: string[] = [];
