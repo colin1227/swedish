@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Text } from "react-native-web";
+import { Text, CheckBox } from "react-native-web";
 // import { Link } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -124,27 +124,34 @@ export const Header = ({
         <div
           style={{
             display: 'flex',
+            alignItems: 'center',
           }}
         >
           <div
             style={{
               display: 'flex',
-              alignItems: 'center'
+              alignItems: 'center',
+              marginRight: '10px',
             }}
           >
             <Text style={{
               color: '#FFFFFF',
+              marginRight: '5px',
+              lineHeight: '26px',
             }}>Strict Search</Text>
-            <input
-              type="checkbox"
+            <CheckBox
               value={isStrict}
-              onChange={changeStrict}
+              onValueChange={changeStrict}
               style={{
                 marginRight: '10px'
               }} />
           </div>
           <input style={{
             height: 26,
+            padding: '5px 10px',
+            borderRadius: '4px',
+            border: '1px solid #ccc',
+            outline: 'none',
           }} onChange={(event) => {
             setTextInput(event.target.value)
           }} />
@@ -154,11 +161,7 @@ export const Header = ({
         width: width / 3,
         justifyContent: 'space-between',
       }}>
-        {/* <Link to={{ screen: 'Words', params: {} }} style={aTagStyle}>Words</Link>
-        <Link to={{ screen: 'Alphabet', params: {} }} style={aTagStyle}>Alphabet</Link>
-        <Link to={{ screen: 'Notes', params: {} }} style={aTagStyle}>Notes</Link> */}
         {/*
-        
         Guess the Word:
          - i guesses, n seconds
          - i * n seconds
