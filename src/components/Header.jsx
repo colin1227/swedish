@@ -25,7 +25,9 @@ export const Header = ({
   }, [navigation]);
 
   useEffect(() => {
-    console.log("page", page)
+    if (page) {
+      console.log("page", page)
+    }
   }, [page]);
   useEffect(() => {
     if (textInput.length >= 2) {
@@ -167,7 +169,7 @@ export const Header = ({
         <Link style={aTagStyle}>Game</Link> */}
 
         <button style={aTagStyle} onClick={() => pageNavigation('WordsIGot')}>WordsIGot</button>
-        <button style={aTagStyle} onClick={ () => pageNavigation("Notes")}>Notes</button>
+        <button style={aTagStyle} onClick={() => pageNavigation("Notes")}>Notes</button>
         <button style={aTagStyle} onClick={() => pageNavigation('Alphabet')}>Alphabet</button>
       </div >
     </header >

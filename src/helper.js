@@ -142,4 +142,3 @@ export const selectiveZipper = (start, end) => {
   }
   return zipper;
 }
-console.log(SWE_wordlist.length)

@@ -27,12 +27,7 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   console.log(`pageStart: ${pageStart}`);
-  // }, [pageStart]);
-
   useEffect(() => {
-    console.log('navigationRef', navigationRef?.getCurrentRoute().name)
     setPage(navigationRef?.getCurrentRoute().name)
   }, [navigationRef]);
 
@@ -42,7 +37,6 @@ function App() {
         ref={navigationRef}
         onReady={() => {
           const r = navigationRef.current.getCurrentRoute().name;
-          console.log('routeNameRef onReady:', r)
           routeNameRef.current = r;
         }}>
         <Header

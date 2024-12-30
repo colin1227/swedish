@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { selectWord, allENvowels, allSWEVowels, symbolsIndexes } from '../helper'
-import { Button, Text, TextInput, CheckBox } from "react-native-web";
+import { selectWord, allENvowels, allSWEVowels, symbolsIndexes } from '../helper';
+import { Button } from 'react-native';
+import { Text, TextInput, CheckBox } from "react-native-web";
 import debounce from 'lodash.debounce';
 import { convertToObject } from 'typescript';
 
@@ -8,6 +9,7 @@ const fontSize = 16;
 const marginLeft = 50;
 
 const field = (title, text, handleTextChange, read, rows = 4, width = 450) => {
+  // console.log('title', title, 'text', text);
   return (
     <div style={{
       width,
@@ -41,7 +43,7 @@ const field = (title, text, handleTextChange, read, rows = 4, width = 450) => {
   );
 }
 
-const Notes = ({ /* wordIndex */ }) => {
+const Notes = ({ /* wordIndex, setWordIndex, setSearch */ }) => {
   const wordIndex = 54420;
   const [EN_word, setEN_word] = useState('');
   const [SWE_word, setSWE_word] = useState('');
@@ -71,9 +73,10 @@ const Notes = ({ /* wordIndex */ }) => {
     const _ENVowels = en.split('').filter((letter) => allENvowels.includes(letter));
     console.log('_ENVowels', _ENVowels);
     setEN_Vowels(_ENVowels);
+    setNumberOfENVowels(_ENVowels.length);
 
     const _SWEVowels = swe.split('').filter((letter) => allSWEVowels.includes(letter));
-    console.log('_SWEVowels', _SWEVowels);
+    // console.log('_SWEVowels', _SWEVowels);
     setSWE_Vowels(_SWEVowels);
 
     setBackgroundColors(swe.split('').map((l) => allSWEVowels.includes(l) ? '#FFFFFF' : "#BABABA"));
@@ -95,7 +98,7 @@ const Notes = ({ /* wordIndex */ }) => {
       messageBody,
       backgroundColors
     };
-    console.log('allStateChangesAsAnObject', allStateChangesAsAnObject)
+    // console.log('allStateChangesAsAnObject', allStateChangesAsAnObject)
   }, [EN_Vowels,
     EN_word,
     SWE_Vowels,
@@ -107,22 +110,11 @@ const Notes = ({ /* wordIndex */ }) => {
     numberOfENVowels,
     numberOfLongFormVowels,
     numberOfShortFormVowels,
-    shortFormVowelIndexes])
+    shortFormVowelIndexes]);
 
   useEffect(() => {
-    if (!symbolsIndexes.includes(wordIndex)) {
-      let numberOfENVowels = 0;
-      let _ENVowels = [];
-      for (let i = 0; i < EN_word.length; i++) {
-        if (allENvowels.includes(i)) { // add rules for y based on sylables?
-          numberOfENVowels = numberOfENVowels + 1; // try ++
-          _ENVowels = [..._ENVowels, i];
-        }
-      }
-      setNumberOfENVowels(numberOfENVowels);
-      setEN_Vowels(_ENVowels);
-    }
-  }, [EN_word])
+    console.log('EN_Vowels', EN_Vowels);
+  }, [EN_Vowels])
 
   const wordParser = useCallback((word) => {
     return (
@@ -136,6 +128,7 @@ const Notes = ({ /* wordIndex */ }) => {
             borderTopLeftRadius: 11.25,
             borderTopRightRadius: 11.25,
             display: 'inline-block',
+            userSelect: 'none'
           }}
         >{word.split('').map((letter, index) => {
           const handlePress = debounce(() => {
@@ -186,11 +179,13 @@ const Notes = ({ /* wordIndex */ }) => {
           }, 250);
 
           return (
-
             <Text
               key={`${letter}-${index}`}
               onPress={handlePress}
+              onClick={handlePress}
               style={{
+                WebkitTapHighlightColor: backgroundColors[index],
+                msScrollbarHighlightColor: backgroundColors[index],
                 backgroundColor: backgroundColors[index],
                 borderColor: 'black',
                 borderWidth: '1px',
@@ -213,18 +208,22 @@ const Notes = ({ /* wordIndex */ }) => {
           }}>
           <Text
             style={{
-              color: 'white',
+              color: 'black',
               fontSize: 16,
               marginLeft: 50,
-              marginBottom: 12
+              marginRight: 240,
+              marginBottom: 12,
+              backgroundColor: '#8adcff'
             }}
           >Short Form Vowels: {numberOfShortFormVowels}</Text>
           <Text
             style={{
-              color: 'white',
+              color: 'black',
               fontSize: 16,
               marginLeft: 50,
-              marginBottom: 12
+              marginRight: 240,
+              marginBottom: 12,
+              backgroundColor: '#fff0a3'
             }}
           >Long Form Vowels: {numberOfLongFormVowels}</Text>
         </div>
@@ -243,14 +242,14 @@ const Notes = ({ /* wordIndex */ }) => {
   ]);
 
   const validateNotes = useCallback(() => {
-    if (SWE_Vowels.length === longFormVowelIndexes + shortFormVowelIndexes) {
-      console.log('valid')
+    if (SWE_Vowels.length === numberOfLongFormVowels + numberOfShortFormVowels && EN_Vowels.length === numberOfENVowels) {
+      // console.log('valid')
       return true;
     } else {
-      console.log('invalid')
+      // console.log('invalid')
       return false;
     }
-  }, [SWE_Vowels, longFormVowelIndexes, shortFormVowelIndexes])
+  }, [EN_Vowels.length, SWE_Vowels.length, numberOfENVowels, numberOfLongFormVowels, numberOfShortFormVowels])
 
   const submit = () => {
     let wordOptions = {
@@ -338,32 +337,33 @@ const Notes = ({ /* wordIndex */ }) => {
             }}
           >Important?</Text>
         </div>
-        {field("EN vowels", EN_Vowels, (() => { }), true, 1,)}
-        {field("SWE vowels", SWE_Vowels, (() => { }), true, 1,)}
+        {field("EN vowels", JSON.stringify(EN_Vowels), (() => { }), true, 1)}
+        {field("SWE vowels", JSON.stringify(SWE_Vowels), (() => { }), true, 1)}
         {field("Notes about Word", messageBody, setMessageBody, false, 4)}
         <div
           style={
             {
-              width: 450,
+              width: 350,
               backgroundColor: 'rgb(0, 106, 167)',
-              display: 'flex',
-              flexDirection: 'column',
-              paddingBottom: 25
+              paddingBottom: 25,
+              paddingLeft: 50,
+              paddingRight: 50,
             }}>
 
           <Button
             title='submit'
+            onPress={submit}
+            disabled={!validateNotes()}
+            color={'hsl(148, 48.10%, 15.90%)'}
             style={{
               width: 350,
               height: 50,
-              backgroundColor: 'hsl(148, 48.10%, 15.90%)',
               color: 'white',
               fontSize: 24,
               marginTop: 25,
               marginBottom: 25
             }}
-            disabled={!validateNotes()}
-            onClick={submit} />
+          />
         </div>
       </div>
     </div>
