@@ -1,86 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import { selectiveZipper } from '../helper';
-import { Header } from '../components/Header';
+import React, { useState, useEffect, useCallback } from 'react';
+import { SWEalphabet, ENalphabet, fisrtCharEN, firstCharSWE } from '../helper';
+import { Text } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
-export const Alphabet = ({ navigationRef, pageStart, searchTerm }) => {
+export const Alphabet = (params) => {
   const { innerWidth: width } = window;
-  const { en: defaultEN, swe: defaultSWE } = selectiveZipper(0, 1000);
-  // make these an unfilteredWords
-  const [ENwords, setENwords] = useState(defaultEN)
-  const [SWEwords, setSWEwords] = useState(defaultSWE);
-  // filteredWords
-  const [ENfilteredWords, setENfilteredWords] = useState(defaultEN);
-  const [SWEfilteredWords, setSWEfilteredWords] = useState(defaultSWE);
-  // console.log(navigationRef)
-  useEffect(() => {
-    const { en, swe } = selectiveZipper(pageStart, pageStart + 1000);
-    setENwords(en);
-    setSWEwords(swe);
-    setENfilteredWords(en);
-    setSWEfilteredWords(swe);
-    // console.log(`pageStart: ${pageStart}`);
-  }, [pageStart]);
+  const navigation = useNavigation();
+  console.log('params', params)
+  const open = (unfiltered, lang) => {
+    const alphabet = unfiltered.filter(v => v !== 'symbols')
 
-  useEffect(() => {
-    if (searchTerm.length >= 2) {
-      let ENtoReplace = [];
-      let SWEtoReplace = [];
-      for (let i = 0; i < ENwords.length; i++) {
-        if (searchTerm && (ENwords[i].includes(searchTerm) || SWEwords[i].includes(searchTerm))) {
-          ENtoReplace.push(ENwords[i]);
-          SWEtoReplace.push(SWEwords[i]);
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
+      }}>
+        {
+          alphabet.map((letter, index) => {
+            return (
+              <Text
+                onPress={() => {
+                  if (lang === 'swe') {
+                    console.log('firstCharSWE[index]', firstCharSWE[index])
+                    // setPage("WordsIGot");
+                    navigation.navigate('WordsIGot', { pageStart: firstCharSWE[index] });
+                  } else {
+                    navigation.navigate('WordsIGot', { searchTerm: letter, pageStart: fisrtCharEN[index] });
+                  }
+                }}
+                style={{
+                  fontSize: 34,
+                  marginRight: 10,
+                  marginTop: 10,
+                  padding: 10,
+                  backgroundColor: '#FFFFFF'
+                }}>
+                {letter.toUpperCase()}
+              </Text>
+            )
+          })
         }
-      }
-      console.log('finished for loop')
-      setENfilteredWords(ENtoReplace);
-      setSWEfilteredWords(SWEtoReplace);
-    } else {
-      setENfilteredWords(ENwords);
-      setSWEfilteredWords(SWEwords);
-    }
-  }, [ENwords, SWEwords, searchTerm, pageStart]);
-
-  return (
-    <div style={{
-      textAlign: 'center',
-      backgroundColor: '#bbbbbb',
-    }}>
-      {/* <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} pageStart={pageStart} setPageStart={setPageStart} /> */}
-      <div>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          paddingTop: 65
-        }}>
-          {
-            SWEfilteredWords.map((w, i) => {
-              return (
-                <div
-                  key={i}
-                  style={{
-                    fontSize: 24,
-                    flexGrow: 1,
-                    width: width / 4,
-                    height: 100
-                  }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column'
-                    }}>
-                    <div>{w}</div>
-                    <div>{ENfilteredWords[i]}</div>
-                  </div>
-                </div>
-              )
-            })}
-          <button onClick={() => navigationRef.navigate('brevity')}>asdf</button>
-        </div>
-        {/* <footer className='App-footer'>
-        </footer> */}
       </div>
-    </div>
-
+    )
+  }
+  console.log('typeof SWEalphabet', typeof SWEalphabet, SWEalphabet)
+  return (
+    <div>
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        paddingTop: 65,
+        flexDirection: 'column'
+      }}>
+        <div
+          style={{ paddingBottom: 10 }}>
+          <Text
+            style={{
+              fontSize: 32,
+              color: 'white'
+            }}>Swedish Alphabet</Text>
+        </div>
+        <div>
+          {open(SWEalphabet, 'swe')}
+        </div>
+        <div style={{
+          paddingBottom: 10
+        }}>
+          <Text style={{
+            fontSize: 32,
+            color: 'white'
+          }}>English Alphabet</Text>
+        </div>
+        {open(ENalphabet, 'en')}
+      </div >
+    </div >
   )
 }
 

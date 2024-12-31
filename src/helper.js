@@ -142,3 +142,87 @@ export const selectiveZipper = (start, end) => {
   }
   return zipper;
 }
+
+export const firstCharSWE = [
+  28,
+  18171,
+  46687,
+  51113,
+  65091,
+  74864,
+  107567,
+  122091,
+  141177,
+  153218,
+  158346,
+  188918,
+  205635,
+  228931,
+  239767,
+  250616,
+  271911,
+  272017,
+  288700,
+  345023,
+  370261,
+  381863,
+  399352,
+  399991,
+  400048,
+  401221,
+  404882,
+  401464,
+  406773,
+  0
+]
+export const fisrtCharEN = [
+  27,
+  182,
+  699,
+  1973,
+  755,
+  3626,
+  948,
+  210,
+  75,
+  7886,
+  950,
+  1235,
+  382,
+  72,
+  7,
+  151,
+  7997,
+  1100,
+  52,
+  6,
+  30,
+  3877,
+  179,
+  94337,
+  7947,
+  32666,
+  0
+]
+
+const findFirstOf = (small, large) => {
+  let firstCharLang = small.map(() => 0)
+
+  for (let j = 0; j < small.length; j++) {
+    for (let i = 0; i < large.length; i++) {
+      const word = large[i];
+      if (word.split('')[0] === small[j]) {
+        console.log('found: ', word, 'at index: ', i, 'assigning to: ', small[j], 'j:', j)
+        firstCharLang[j] = i;
+        break;
+      }
+    }
+  }
+  console.log('result: ', firstCharLang)
+}
+
+console.log('EN:');
+findFirstOf(ENalphabet, EN_wordlist);
+console.log('SWE:');
+findFirstOf(SWEalphabet, SWE_wordlist);
+
